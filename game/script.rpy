@@ -9,12 +9,28 @@ define e = Character("Eileen")
 # The game starts here.
 
 label start:
+    scene black
 
+    menu:
+        "Choose a shader demo scene."
+
+        "Whirl":
+            jump whirl_test
+
+        "Cancel":
+            # This ends the game.
+            return
+
+label whirl_test:
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
     scene bg room
+
+    # These display lines of dialogue.
+
+    e "Hello! I'm going to be shown with the whirl transition!"
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -23,12 +39,8 @@ label start:
     show eileen happy
     with whirl
 
-    # These display lines of dialogue.
+    e "ahhhh time and space is bending!"
 
-    e "You've created a new Ren'Py game."
+    # Return to the shader selection scene.
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
-
-    # This ends the game.
-
-    return
+    jump start
