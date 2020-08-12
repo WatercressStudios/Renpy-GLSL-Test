@@ -57,8 +57,10 @@ transform multiply(duration, color):
     shader "multiply_shader"
 
     parallel:
-        ease duration u_multiply_r color[0]
+        ease duration u_multiply_r color.rgb[0]
     parallel:
-        ease duration u_multiply_g color[1]
+        ease duration u_multiply_g color.rgb[1]
     parallel:
-        ease duration u_multiply_b color[2]
+        ease duration u_multiply_b color.rgb[2]
+    parallel:
+        ease duration u_multiply_a color.alpha

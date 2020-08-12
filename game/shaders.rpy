@@ -76,7 +76,8 @@ init python:
         uniform float u_multiply_r;
         uniform float u_multiply_g;
         uniform float u_multiply_b;
+        uniform float u_multiply_a;
     """, fragment_250="""
         vec4 Color = texture2D(tex0, v_tex_coord);
-        gl_FragColor.rgb = vec3(Color.r * u_multiply_r, Color.g * u_multiply_g, Color.b * u_multiply_b);
+        gl_FragColor = vec4(Color.r * u_multiply_r, Color.g * u_multiply_g, Color.b * u_multiply_b, Color.a * u_multiply_a);
     """)
