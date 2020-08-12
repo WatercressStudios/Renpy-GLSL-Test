@@ -39,16 +39,26 @@ transform whirl(old_widget, new_widget):
         # Quickly dissolve to the new child.
         new_widget with Dissolve(1.0)
 
-transform blur:
-    delay 4
-    alpha 1
+transform blur(duration, size):
+    delay duration
 
     mesh True
     shader "blur_shader"
 
     u_resolution_x 1920
     u_resolution_y 1080
-    u_blur_size 0.0
 
-    ease 2.0 u_blur_size 100.0
-    ease 2.0 u_blur_size 0.0
+    ease duration u_blur_size size
+
+transform multiply(duration, color):
+    delay duration
+
+    mesh True
+    shader "multiply_shader"
+
+    parallel:
+        ease duration u_multiply_r color[0]
+    parallel:
+        ease duration u_multiply_g color[1]
+    parallel:
+        ease duration u_multiply_b color[2]

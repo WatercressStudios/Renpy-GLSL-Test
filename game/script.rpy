@@ -20,6 +20,9 @@ label start:
         "Blur":
             jump blur_test
 
+        "Multiply":
+            jump multiply_test
+
         "Cancel":
             # This ends the game.
             return
@@ -65,7 +68,37 @@ label blur_test:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy at blur
+    show eileen happy at blur(2.0, 100.0)
+    pause 2.0
+    show eileen at blur(2.0, 0.0)
+
+    e "ahhhh time and space is bending!"
+
+    # Return to the shader selection scene.
+
+    jump start
+
+label multiply_test:
+    # Show a background. This uses a placeholder by default, but you can
+    # add a file (named either "bg room.png" or "bg room.jpg") to the
+    # images directory to show it.
+
+    scene bg room
+
+    # These display lines of dialogue.
+
+    show eileen happy:
+        xalign 0.5
+    e "Hello! I'm going to be coloured in and out!"
+
+    # This shows a character sprite. A placeholder is used, but you can
+    # replace it by adding a file named "eileen happy.png" to the images
+    # directory.
+
+    show eileen happy at multiply(0.0, (1.0, 1.0, 1.0))
+    show eileen at multiply(1.0, (0.0, 2.0, 0.5))
+    pause 1.0
+    show eileen at multiply(1.0, (1.0, 1.0, 1.0))
 
     e "ahhhh time and space is bending!"
 
