@@ -1,9 +1,11 @@
-renpy.texture whirl_shader renpy.texture whirl_shader
-renpy.geometry renpy.texture
-renpy.solid
-renpy.texture
-renpy.ftl
-renpy.geometry renpy.texture whirl_shader
-renpy.dissolve renpy.geometry
-renpy.dissolve renpy.dissolve
-renpy.geometry renpy.solid
+renpy.texture whirl_shader renpy.texture whirl_shader
+renpy.geometry renpy.texture
+renpy.solid
+renpy.texture blur_shader renpy.texture blur_shader
+renpy.ftl
+renpy.geometry renpy.texture whirl_shader
+renpy.dissolve renpy.geometry
+renpy.dissolve renpy.dissolve
+blur_shader renpy.geometry renpy.texture
+renpy.texture
+renpy.geometry renpy.solid

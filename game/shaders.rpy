@@ -37,3 +37,37 @@ init python:
         // Look up the coordinate, to find the actual color.
         gl_FragColor = texture2D(tex0, tex_coord);
     """)
+
+    renpy.register_shader("blur_shader", variables="""
+        uniform float u_blur_size;
+        uniform float u_resolution_x;
+        uniform float u_resolution_y;
+    """, fragment_250="""
+        float Pi = 6.28318530718; // Pi*2
+
+        // GAUSSIAN BLUR SETTINGS {{{
+        float Directions = 32.0; // BLUR DIRECTIONS (Default 16.0 - More is better but slower)
+        float Quality = 8.0; // BLUR QUALITY (Default 4.0 - More is better but slower)
+        // GAUSSIAN BLUR SETTINGS }}}
+
+        vec2 Resolution = vec2(u_resolution_x, u_resolution_y);
+        vec2 Radius = u_blur_size/Resolution.xy;
+
+        // Pixel colour
+        vec4 Color = texture2D(tex0, v_tex_coord);
+
+        // Blur calculations
+        float Count = 1;
+        for( float d=0.0; d<Pi; d+=Pi/Directions)
+        {
+    		for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
+            {
+    			Color += texture2D(tex0, v_tex_coord+vec2(cos(d),sin(d))*Radius*i);
+                Count++;
+            }
+        }
+
+        // Output to screen
+        Color /= Count;
+        gl_FragColor =  Color;
+    """)

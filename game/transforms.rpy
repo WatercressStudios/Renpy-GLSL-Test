@@ -28,11 +28,27 @@ transform whirl(old_widget, new_widget):
     # Over 2 seconds, rotate by 720 degrees.
     # The shader takes radians, where 2 * pi radians are equal
     # to 360 degrees.
-    linear 2.0 u_whirl_angle (4 * math.pi)
+    parallel:
+        ease 2.0 u_whirl_angle (4 * math.pi)
+        # As we're doing that, and continuing on, spend 2 seconds
+        # going back to no whirl.
+        ease 2.0 u_whirl_angle 0.0
 
-    # Quickly dissolve to the new child.
-    new_widget with Dissolve(.1)
+    parallel:
+        pause 1.5
+        # Quickly dissolve to the new child.
+        new_widget with Dissolve(1.0)
 
-    # As we're doing that, and continuing on, spend 2 seconds
-    # going back to no whirl.
-    linear 2.0 u_whirl_angle 0.0
+transform blur:
+    delay 4
+    alpha 1
+
+    mesh True
+    shader "blur_shader"
+
+    u_resolution_x 1920
+    u_resolution_y 1080
+    u_blur_size 0.0
+
+    ease 2.0 u_blur_size 100.0
+    ease 2.0 u_blur_size 0.0
